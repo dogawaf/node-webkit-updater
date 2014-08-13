@@ -121,8 +121,8 @@
     },
     win: function(filename, cb){
       //TODO: fix to put in proper zip filename
-      exec(path.resolve(path.dirname(process.execPath),'tools/unzip.exe') + " -u -o " +
-        filename + " -d " + os.tmpdir(), function(err){
+      exec("\"" + path.resolve(path.dirname(process.execPath),'tools/unzip.exe') + "\" -u -o \"" +
+        filename + "\" -d " + os.tmpdir(), function(err){
           if(err){
             return cb(err);
           }
