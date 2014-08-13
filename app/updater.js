@@ -43,10 +43,18 @@
       }
     }
   }
-  // download the package to template folder
-  updater.prototype.download = function(cb){
-    var pkg = request(this.manifest.packages[platform]);
-    var filename = path.basename(this.manifest.packages[platform]);
+
+  /**
+   * Download the package to template folder
+   * @param  {Function} cb called when download completes
+   * @param  {Object} manifest package.json manifest where are defined remote url
+   * @return {Request} Request stream
+   */
+  updater.prototype.download = function(cb, newManifest){
+    var manifest = newManifest || this.manifest;
+    var url = manifest.packages[platform];
+    var pkg = request(url);
+    var filename = path.basename(url);
     pkg.pipe(fs.createWriteStream(path.join(os.tmpdir(), filename)));
     pkg.on('end', appDownloaded);
 
