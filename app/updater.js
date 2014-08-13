@@ -20,7 +20,7 @@
   var execFile = require('child_process').execFile;
   var spawn = require('child_process').spawn;
   var ncp = require('ncp');
- 
+
   var platform = /^win/.test(process.platform)?'win':/^darwin/.test(process.platform)?'mac':process.arch == 'ia32'?'linux32':'linux64'; //here will be regular exp where we will define platform
 
   function updater(manifest){
@@ -69,10 +69,10 @@
   updater.prototype.getAppExec = function(){
     var execFolder = this.getAppPath();
     var exec = {
-      mac:'',
-      win: path.basename(execFolder) + '.exe',
-      linux32: path.basename(execFolder),
-      linux64: path.basename(execFolder)
+      mac: '',
+      win: path.basename(process.execPath),
+      linux32: path.basename(process.execPath),
+      linux64: path.basename(process.execPath)
     }
     return path.join(execFolder, exec[platform]);
   }
